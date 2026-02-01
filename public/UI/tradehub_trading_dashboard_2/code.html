@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeHub Terminal</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "sidebar-bg": "#0D141F",
+                        "background-dark": "#0B0E11",
+                        "surface-dark": "#151A21",
+                        "surface-lighter": "#1E232B",
+                        "text-secondary": "#848E9C",
+                        "trade-green": "#0ECB81",
+                        "trade-red": "#F6465D",
+                        "grid-line": "#1E232B",
+                        "nav-active": "#1C2E4A",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "sm": "0.125rem", "lg": "0.375rem", "xl": "0.5rem"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E11; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2B3139; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #474D57; 
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        .nav-item {
+            @apply flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-white transition-colors cursor-pointer border-r-4 border-transparent;
+        }
+        .nav-item.active {
+            @apply text-primary bg-nav-active border-primary;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-grid {
+            background-size: 80px 40px;
+            background-image: 
+                linear-gradient(to right, #1E232B 1px, transparent 1px),
+                linear-gradient(to bottom, #1E232B 1px, transparent 1px);
+        }
+        .candle-green { @apply w-2.5 bg-trade-green relative rounded-sm; }
+        .candle-green::before { content: ''; @apply absolute left-1/2 -translate-x-1/2 w-0.5 bg-trade-green; top: -4px; bottom: -4px; }
+        .candle-red { @apply w-2.5 bg-trade-red relative rounded-sm; }
+        .candle-red::before { content: ''; @apply absolute left-1/2 -translate-x-1/2 w-0.5 bg-trade-red; top: -4px; bottom: -4px; }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-hidden h-screen flex flex-col">
+<header class="h-12 flex items-center justify-between border-b border-grid-line px-4 bg-surface-dark flex-shrink-0 z-20">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">candlestick_chart</span>
+<span class="font-bold tracking-tight text-lg">TradeHub Terminal</span>
+</div>
+<div class="h-6 w-px bg-grid-line mx-2"></div>
+<div class="flex items-center gap-2 px-3 py-1 rounded bg-surface-lighter border border-grid-line">
+<span class="material-symbols-outlined text-base text-text-secondary">person</span>
+<span class="text-xs font-mono text-text-secondary">ID: 8829104</span>
+</div>
+<span class="text-xs font-bold text-yellow-500 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-sm">DEMO ACCOUNT</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs text-text-secondary">Connected <span class="text-trade-green">12ms</span></span>
+<button class="text-text-secondary hover:text-white transition-colors"><span class="material-symbols-outlined text-xl">notifications</span></button>
+<div class="size-8 rounded-full bg-surface-lighter border border-grid-line flex items-center justify-center overflow-hidden">
+<div class="bg-center bg-no-repeat bg-cover size-full" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAdqmM3xZrC5UJTbMmxOGXQBT2ehmWW4JypcwIkKUAjH0MGIE4_fD_g0FMtGjF2rFaVcLQ66H8J0LJxR5E7KbHoCB4DzY6ejY3iXxfTk7SVKtHBN6oW2YmrIJeEy0uNtigcLhbBUbs7ROxeWf3OftX3FSQl9UTiEi766jQhqOlPByfpiqLojN_N2lpWkP6QwzGRNpLz6ciP_PpBlwRcGxsIRVehmMshMKLRBNZI7s0UczbwmTohU5SJLawR4D5uslmuQq0qSuCwrOmw");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-60 flex-shrink-0 flex flex-col border-r border-grid-line bg-sidebar-bg z-10">
+<div class="flex items-center gap-3 px-4 py-6 border-b border-grid-line/30 mb-2">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1">candlestick_chart</span>
+<span class="font-bold text-lg text-white">TradeHub</span>
+</div>
+<nav class="flex-1">
+<div class="nav-item active">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-sm font-medium">Dashboard</span>
+</div>
+<div class="nav-item">
+<span class="material-symbols-outlined">news</span>
+<span class="text-sm font-medium">News</span>
+</div>
+<div class="nav-item">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-medium">Community</span>
+</div>
+<div class="nav-item">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-sm font-medium">AI Bot</span>
+</div>
+<div class="nav-item">
+<span class="material-symbols-outlined">content_copy</span>
+<span class="text-sm font-medium">Copy Trading</span>
+</div>
+<div class="nav-item">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Wallet</span>
+</div>
+</nav>
+<div class="border-t border-grid-line/30 pt-2 pb-4">
+<div class="nav-item">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</div>
+<div class="nav-item">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</div>
+</div>
+</aside>
+<div class="w-72 flex-shrink-0 flex flex-col border-r border-grid-line bg-surface-dark">
+<div class="p-3 border-b border-grid-line">
+<div class="flex items-center bg-background-dark rounded border border-grid-line px-2 h-9 focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-text-secondary text-lg">search</span>
+<input class="bg-transparent border-none outline-none text-xs w-full text-white placeholder-text-secondary focus:ring-0 ml-1" placeholder="Search markets..." type="text"/>
+</div>
+</div>
+<div class="flex text-xs border-b border-grid-line">
+<button class="flex-1 py-2 text-primary border-b-2 border-primary font-medium">Favorites</button>
+<button class="flex-1 py-2 text-text-secondary hover:text-white transition-colors">Forex</button>
+<button class="flex-1 py-2 text-text-secondary hover:text-white transition-colors">Crypto</button>
+<button class="flex-1 py-2 text-text-secondary hover:text-white transition-colors">Stocks</button>
+</div>
+<div class="grid grid-cols-4 px-3 py-2 text-[10px] text-text-secondary font-medium border-b border-grid-line">
+<div class="col-span-2">SYMBOL</div>
+<div class="text-right">BID</div>
+<div class="text-right">CHG%</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<div class="grid grid-cols-4 px-3 py-3 hover:bg-surface-lighter border-b border-grid-line/50 cursor-pointer group transition-colors">
+<div class="col-span-2 flex flex-col justify-center">
+<span class="text-xs font-bold text-white group-hover:text-primary">EURUSD</span>
+<span class="text-[10px] text-text-secondary">Euro vs US Dollar</span>
+</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-red">1.0845</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-red">-0.12%</div>
+</div>
+<div class="grid grid-cols-4 px-3 py-3 hover:bg-surface-lighter border-b border-grid-line/50 cursor-pointer group transition-colors">
+<div class="col-span-2 flex flex-col justify-center">
+<span class="text-xs font-bold text-white group-hover:text-primary">GBPUSD</span>
+<span class="text-[10px] text-text-secondary">Great Britain Pound</span>
+</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">1.2688</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">+0.05%</div>
+</div>
+<div class="grid grid-cols-4 px-3 py-3 bg-surface-lighter border-l-2 border-l-primary border-b border-grid-line/50 cursor-pointer relative">
+<div class="col-span-2 flex flex-col justify-center">
+<span class="text-xs font-bold text-white">XPDUSD</span>
+<span class="text-[10px] text-text-secondary">Palladium Spot</span>
+</div>
+<div class="flex items-center justify-end text-xs font-mono text-white">1688.5</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">+1.24%</div>
+</div>
+<div class="grid grid-cols-4 px-3 py-3 hover:bg-surface-lighter border-b border-grid-line/50 cursor-pointer group transition-colors">
+<div class="col-span-2 flex flex-col justify-center">
+<span class="text-xs font-bold text-white group-hover:text-primary">BTCUSD</span>
+<span class="text-[10px] text-text-secondary">Bitcoin</span>
+</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">42,560</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">+2.45%</div>
+</div>
+<div class="grid grid-cols-4 px-3 py-3 hover:bg-surface-lighter border-b border-grid-line/50 cursor-pointer group transition-colors">
+<div class="col-span-2 flex flex-col justify-center">
+<span class="text-xs font-bold text-white group-hover:text-primary">XAUUSD</span>
+<span class="text-[10px] text-text-secondary">Gold Spot</span>
+</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">2032.1</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-green">+0.42%</div>
+</div>
+<div class="grid grid-cols-4 px-3 py-3 hover:bg-surface-lighter border-b border-grid-line/50 cursor-pointer group transition-colors">
+<div class="col-span-2 flex flex-col justify-center">
+<span class="text-xs font-bold text-white group-hover:text-primary">USDJPY</span>
+<span class="text-[10px] text-text-secondary">US Dollar vs Yen</span>
+</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-red">148.20</div>
+<div class="flex items-center justify-end text-xs font-mono text-trade-red">-0.30%</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col min-w-0 bg-background-dark">
+<div class="h-12 flex items-center justify-between px-4 border-b border-grid-line bg-surface-dark">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<h2 class="text-base font-bold text-white">XPDUSD</h2>
+<span class="text-xs bg-surface-lighter border border-grid-line px-1.5 rounded text-text-secondary">H1</span>
+</div>
+<div class="h-4 w-px bg-grid-line"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-text-secondary hover:text-white cursor-pointer p-1">schedule</span>
+<span class="material-symbols-outlined text-text-secondary hover:text-white cursor-pointer p-1">candlestick_chart</span>
+<span class="material-symbols-outlined text-text-secondary hover:text-white cursor-pointer p-1">ssid_chart</span>
+</div>
+<div class="h-4 w-px bg-grid-line"></div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-red-500 animate-pulse"></div>
+<span class="text-[10px] font-medium text-text-secondary uppercase tracking-wider">Market Closed</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 hover:bg-surface-lighter rounded text-text-secondary"><span class="material-symbols-outlined text-lg">settings</span></button>
+<button class="p-1.5 hover:bg-surface-lighter rounded text-text-secondary"><span class="material-symbols-outlined text-lg">fullscreen</span></button>
+<button class="p-1.5 hover:bg-surface-lighter rounded text-text-secondary"><span class="material-symbols-outlined text-lg">photo_camera</span></button>
+</div>
+</div>
+<div class="flex-1 relative bg-background-dark overflow-hidden flex flex-col chart-grid">
+<div class="absolute w-full border-t border-dashed border-primary z-10 opacity-60 pointer-events-none" style="top: 55%;"></div>
+<div class="absolute inset-0 flex items-end justify-around pb-20 px-8 pointer-events-none">
+<div class="candle-red h-32 mb-10"></div>
+<div class="candle-red h-24 mb-16"></div>
+<div class="candle-green h-40 mb-24"></div>
+<div class="candle-green h-28 mb-32"></div>
+<div class="candle-red h-16 mb-44"></div>
+<div class="candle-green h-48 mb-36"></div>
+<div class="candle-green h-32 mb-48"></div>
+<div class="candle-red h-20 mb-52"></div>
+<div class="candle-green h-56 mb-40"></div>
+<div class="candle-green h-44 mb-56"></div>
+<div class="candle-red h-28 mb-64"></div>
+<div class="candle-red h-40 mb-56"></div>
+<div class="candle-green h-12 mb-52"></div>
+<div class="candle-green h-36 mb-44"></div>
+<div class="candle-red h-48 mb-32"></div>
+<div class="candle-red h-32 mb-24"></div>
+<div class="candle-green h-16 mb-28"></div>
+<div class="candle-green h-40 mb-20"></div>
+<div class="candle-red h-24 mb-12"></div>
+<div class="candle-red h-36 mb-8"></div>
+</div>
+<div class="absolute bottom-6 left-0 right-14 h-16 flex items-end justify-around px-8 opacity-20 pointer-events-none">
+<div class="w-2 bg-trade-red h-[30%]"></div>
+<div class="w-2 bg-trade-red h-[45%]"></div>
+<div class="w-2 bg-trade-green h-[60%]"></div>
+<div class="w-2 bg-trade-green h-[40%]"></div>
+<div class="w-2 bg-trade-red h-[25%]"></div>
+<div class="w-2 bg-trade-green h-[75%]"></div>
+<div class="w-2 bg-trade-green h-[55%]"></div>
+<div class="w-2 bg-trade-red h-[40%]"></div>
+<div class="w-2 bg-trade-green h-[85%]"></div>
+<div class="w-2 bg-trade-green h-[65%]"></div>
+<div class="w-2 bg-trade-red h-[50%]"></div>
+<div class="w-2 bg-trade-red h-[60%]"></div>
+<div class="w-2 bg-trade-green h-[20%]"></div>
+<div class="w-2 bg-trade-green h-[45%]"></div>
+<div class="w-2 bg-trade-red h-[70%]"></div>
+<div class="w-2 bg-trade-red h-[50%]"></div>
+<div class="w-2 bg-trade-green h-[25%]"></div>
+<div class="w-2 bg-trade-green h-[55%]"></div>
+<div class="w-2 bg-trade-red h-[40%]"></div>
+<div class="w-2 bg-trade-red h-[45%]"></div>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-14 flex flex-col justify-between text-[10px] text-text-secondary font-mono py-4 items-end pr-1 pointer-events-none z-20 border-l border-grid-line bg-background-dark/80">
+<span>1740.00</span>
+<span>1730.00</span>
+<div class="flex items-center gap-1 -mr-1">
+<span class="text-[9px] uppercase font-bold text-trade-green opacity-70">High</span>
+<span class="bg-trade-green text-black px-1 rounded-sm font-bold">1725.40</span>
+</div>
+<span>1720.00</span>
+<span>1710.00</span>
+<span>1700.00</span>
+<span class="text-white bg-primary px-1 rounded-sm font-bold shadow-lg shadow-primary/20">1688.53</span>
+<span>1680.00</span>
+<div class="flex items-center gap-1 -mr-1">
+<span class="text-[9px] uppercase font-bold text-trade-red opacity-70">Low</span>
+<span class="bg-trade-red text-white px-1 rounded-sm font-bold">1672.15</span>
+</div>
+<span>1670.00</span>
+</div>
+<div class="absolute bottom-0 left-0 right-14 h-6 flex justify-between text-[10px] text-text-secondary font-mono px-8 items-center border-t border-grid-line bg-background-dark z-20">
+<span>20:00</span>
+<span>20:15</span>
+<span>20:30</span>
+<span>20:45</span>
+<span>21:00</span>
+<span>21:15</span>
+<span>21:30</span>
+<span>21:45</span>
+<span>22:00</span>
+</div>
+</div>
+<div class="h-48 border-t border-grid-line bg-surface-dark flex flex-col">
+<div class="flex items-center justify-between border-b border-grid-line px-2 bg-surface-dark">
+<div class="flex">
+<button class="px-4 py-2.5 text-xs font-medium text-primary border-b-2 border-primary relative">Positions (0)</button>
+<button class="px-4 py-2.5 text-xs font-medium text-text-secondary hover:text-white hover:bg-surface-lighter transition-colors">Pending Orders</button>
+<button class="px-4 py-2.5 text-xs font-medium text-text-secondary hover:text-white hover:bg-surface-lighter transition-colors">History</button>
+</div>
+<div class="flex gap-1 pr-2">
+<button class="p-1 hover:text-white text-text-secondary"><span class="material-symbols-outlined text-sm">filter_list</span></button>
+<button class="p-1 hover:text-white text-text-secondary"><span class="material-symbols-outlined text-sm">view_module</span></button>
+<button class="p-1 hover:text-white text-text-secondary"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center text-text-secondary gap-2 bg-surface-dark">
+<span class="material-symbols-outlined text-2xl opacity-50">receipt_long</span>
+<p class="text-xs">No open positions</p>
+</div>
+</div>
+</div>
+<div class="w-80 flex-shrink-0 flex flex-col border-l border-grid-line bg-surface-dark">
+<div class="p-4 flex items-center justify-between">
+<h3 class="font-bold text-sm tracking-wide">NEW ORDER</h3>
+<span class="text-[10px] text-text-secondary border border-grid-line px-1.5 py-0.5 rounded uppercase">Spot</span>
+</div>
+<div class="grid grid-cols-2 gap-px px-4 mb-6">
+<div class="bg-trade-red/10 border border-trade-red/20 rounded-l p-3 text-center cursor-pointer hover:bg-trade-red/20 transition-colors">
+<div class="text-[10px] text-trade-red font-bold uppercase mb-1">Bid (Sell)</div>
+<div class="text-xl font-mono font-bold text-trade-red">1688.53</div>
+</div>
+<div class="bg-trade-green/10 border border-trade-green/20 rounded-r p-3 text-center cursor-pointer hover:bg-trade-green/20 transition-colors">
+<div class="text-[10px] text-trade-green font-bold uppercase mb-1">Ask (Buy)</div>
+<div class="text-xl font-mono font-bold text-trade-green">1728.98</div>
+</div>
+</div>
+<div class="px-4 mb-6">
+<label class="text-[10px] font-bold text-text-secondary uppercase block mb-2">Volume (Lots)</label>
+<div class="flex items-center bg-background-dark rounded border border-grid-line focus-within:border-primary transition-colors overflow-hidden">
+<button class="w-10 h-10 flex items-center justify-center text-text-secondary hover:bg-surface-lighter hover:text-white transition-colors border-r border-grid-line">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="bg-transparent border-none text-center w-full text-white focus:ring-0 font-mono font-bold text-base" step="0.01" type="number" value="1.00"/>
+<button class="w-10 h-10 flex items-center justify-center text-text-secondary hover:bg-surface-lighter hover:text-white transition-colors border-l border-grid-line">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="flex justify-between mt-1 px-1">
+<span class="text-[10px] text-text-secondary">Min: 0.01</span>
+<span class="text-[10px] text-text-secondary">Max: 100.0</span>
+</div>
+</div>
+<div class="px-4 mb-6 space-y-4">
+<button class="w-full bg-trade-red hover:bg-red-600 text-white py-4 rounded font-bold transition-colors flex flex-col items-center justify-center">
+<span class="text-sm">SELL @ MARKET</span>
+</button>
+<button class="w-full bg-trade-green hover:bg-green-600 text-white py-4 rounded font-bold transition-colors flex flex-col items-center justify-center">
+<span class="text-sm">BUY @ MARKET</span>
+</button>
+</div>
+<div class="px-4 mt-auto mb-6">
+<div class="flex justify-between items-center py-3 border-t border-grid-line">
+<span class="text-xs text-text-secondary">Margin Req:</span>
+<span class="text-xs font-mono font-bold text-white">844.25 USD</span>
+</div>
+<p class="text-[10px] text-text-secondary text-center mt-2 italic">Market execution. Slippage may apply.</p>
+</div>
+</div>
+</div>
+<footer class="h-8 bg-surface-dark border-t border-grid-line flex items-center px-4 justify-between text-[11px] font-mono select-none flex-shrink-0">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-text-secondary font-bold uppercase">Balance:</span>
+<span class="font-bold text-white tracking-wide">99,949.19</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-secondary font-bold uppercase">Equity:</span>
+<span class="font-bold text-white tracking-wide">99,949.19</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-secondary font-bold uppercase">Margin:</span>
+<span class="font-bold text-white tracking-wide">0.00</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-secondary font-bold uppercase">P&amp;L:</span>
+<span class="font-bold text-white tracking-wide">0.00</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-text-secondary">
+<div class="flex items-center gap-1.5">
+<div class="size-2 rounded-full bg-trade-green"></div>
+<span>Connected <span class="text-white">12ms</span></span>
+</div>
+<div class="h-3 w-px bg-grid-line"></div>
+<span>Server: <span class="text-white">UTC+0</span></span>
+</div>
+</footer>
+
+</body></html>

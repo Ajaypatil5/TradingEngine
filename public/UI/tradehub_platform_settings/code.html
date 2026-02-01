@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeHub Platform Settings</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0a101d",
+                        "surface-dark": "#111a2e",
+                        "border-dark": "#1e293b",
+                        "text-secondary": "#94a3b8"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a101d; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3c83f6; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            background-color: rgba(60, 131, 246, 0.1);
+            color: #3c83f6;
+        }
+        .active-nav-item .material-symbols-outlined {
+            color: #3c83f6;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="hidden w-64 flex-col border-r border-white/5 bg-[#0a101d] p-4 lg:flex">
+<div class="flex items-center gap-3 px-2 mb-8 mt-2">
+<span class="material-symbols-outlined text-primary text-3xl font-bold">bar_chart_4_bars</span>
+<span class="text-white text-xl font-bold tracking-tight">TradeHub</span>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">grid_view</span>
+<span class="text-sm font-medium group-hover:text-white">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">newspaper</span>
+<span class="text-sm font-medium group-hover:text-white">News</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">groups</span>
+<span class="text-sm font-medium group-hover:text-white">Community</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">smart_toy</span>
+<span class="text-sm font-medium group-hover:text-white">AI Bot</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">content_copy</span>
+<span class="text-sm font-medium group-hover:text-white">Copy Trading</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">account_balance_wallet</span>
+<span class="text-sm font-medium group-hover:text-white">Wallet</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 pt-4 border-t border-white/5">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-nav-item transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group text-text-secondary" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-white">logout</span>
+<span class="text-sm font-medium group-hover:text-white">Logout</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-background-dark relative">
+<div class="lg:hidden flex items-center justify-between p-4 border-b border-white/5 bg-[#0a101d]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl font-bold">bar_chart_4_bars</span>
+<div class="font-bold text-lg">TradeHub</div>
+</div>
+<button class="text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="max-w-[1000px] w-full mx-auto p-4 md:p-8 lg:p-12 pb-24">
+<div class="flex flex-wrap gap-2 mb-6">
+<a class="text-text-secondary text-sm font-medium hover:text-white transition-colors" href="#">Home</a>
+<span class="text-text-secondary text-sm font-medium">/</span>
+<span class="text-white text-sm font-medium">Settings</span>
+</div>
+<div class="flex flex-wrap justify-between gap-4 mb-10 border-b border-white/5 pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Platform Settings</h1>
+<p class="text-text-secondary text-base font-normal">Manage your workspace configuration, security protocols, and notification preferences.</p>
+</div>
+<div class="flex items-center">
+<button class="bg-surface-dark hover:bg-border-dark text-white text-sm font-medium py-2.5 px-4 rounded-lg border border-white/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                        View Audit Log
+                    </button>
+</div>
+</div>
+<section class="mb-10">
+<h2 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">palette</span>
+                    Interface Preferences
+                </h2>
+<div class="bg-surface-dark rounded-xl border border-white/5 overflow-hidden">
+<div class="p-6 border-b border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex-1">
+<p class="text-white text-base font-medium mb-1">Display Language</p>
+<p class="text-text-secondary text-sm">Select the language for the trading interface and reports.</p>
+</div>
+<div class="relative min-w-[200px]">
+<select class="appearance-none w-full bg-background-dark border border-white/10 text-white text-sm rounded-lg focus:ring-primary focus:border-primary block p-3 pr-10 outline-none transition-colors">
+<option>English (US)</option>
+<option>Spanish (ES)</option>
+<option>French (FR)</option>
+<option>German (DE)</option>
+<option>Mandarin (CN)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-text-secondary">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div class="p-6 flex items-center justify-between gap-4">
+<div class="flex-1">
+<p class="text-white text-base font-medium mb-1">Dark Mode</p>
+<p class="text-text-secondary text-sm">Toggle between light and dark themes for better visibility.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-12 h-7 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<section class="mb-10">
+<h2 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">lock</span>
+                    Security Settings
+                </h2>
+<div class="bg-surface-dark rounded-xl border border-white/5 overflow-hidden">
+<div class="p-6 border-b border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex gap-4">
+<div class="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary shrink-0">
+<span class="material-symbols-outlined">phonelink_lock</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<p class="text-white text-base font-medium">Two-Factor Authentication (2FA)</p>
+<span class="bg-red-500/10 text-red-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide border border-red-500/20">Disabled</span>
+</div>
+<p class="text-text-secondary text-sm max-w-lg">Protect your account by requiring an additional layer of security when signing in.</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-blue-600 text-white text-sm font-medium py-2.5 px-5 rounded-lg transition-colors shadow-lg shadow-primary/20 whitespace-nowrap">
+                            Enable 2FA
+                        </button>
+</div>
+<div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex gap-4">
+<div class="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary shrink-0">
+<span class="material-symbols-outlined">key</span>
+</div>
+<div>
+<p class="text-white text-base font-medium mb-1">Password</p>
+<p class="text-text-secondary text-sm max-w-lg">Last changed 3 months ago. We recommend updating it regularly.</p>
+</div>
+</div>
+<button class="bg-transparent border border-white/10 hover:bg-white/5 text-white text-sm font-medium py-2.5 px-5 rounded-lg transition-colors whitespace-nowrap">
+                            Change Password
+                        </button>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">mail</span>
+                    Notifications
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-dark rounded-xl border border-white/5 p-6 flex items-start justify-between gap-4 hover:border-primary/50 transition-colors">
+<div>
+<p class="text-white text-base font-medium mb-1">Trade Executions</p>
+<p class="text-text-secondary text-sm">Receive immediate alerts when your buy or sell orders are filled.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="bg-surface-dark rounded-xl border border-white/5 p-6 flex items-start justify-between gap-4 hover:border-primary/50 transition-colors">
+<div>
+<p class="text-white text-base font-medium mb-1">Email Marketing</p>
+<p class="text-text-secondary text-sm">Receive product updates, newsletters, and promotional offers.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer mt-1">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<div class="mt-12 flex justify-end gap-3 pt-6 border-t border-white/5">
+<button class="text-text-secondary hover:text-white font-medium py-2 px-4 transition-colors">Discard Changes</button>
+<button class="bg-primary hover:bg-blue-600 text-white text-base font-medium py-2.5 px-8 rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-95">
+                    Save Preferences
+                </button>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeHub - Forgot Password</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101722",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Background Pattern/Gradient Effect -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]"></div>
+</div>
+<!-- Main Card Container -->
+<main class="relative z-10 w-full max-w-[440px] bg-white dark:bg-[#182334] rounded-xl shadow-2xl border border-gray-100 dark:border-[#2a3b55] overflow-hidden">
+<!-- Header Section -->
+<div class="px-8 pt-10 pb-6 text-center">
+<!-- Logo -->
+<div class="flex items-center justify-center gap-2 mb-8">
+<div class="text-primary">
+<span class="material-symbols-outlined text-4xl">trending_up</span>
+</div>
+<h2 class="text-gray-900 dark:text-white text-2xl font-bold tracking-tight">TradeHub</h2>
+</div>
+<!-- Headlines -->
+<h1 class="text-gray-900 dark:text-white text-[28px] font-bold leading-tight mb-3">Reset Password</h1>
+<p class="text-gray-500 dark:text-[#90a7cb] text-sm font-normal leading-relaxed max-w-[320px] mx-auto">
+                Enter your email address below, and we'll send you a link to reset your password.
+            </p>
+</div>
+<!-- Form Section -->
+<div class="px-8 pb-10">
+<form action="#" method="POST" onsubmit="event.preventDefault();">
+<div class="space-y-6">
+<!-- Email Input -->
+<label class="block">
+<span class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Registered Email</span>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">mail</span>
+</div>
+<input class="block w-full rounded-lg border-gray-300 dark:border-[#314668] bg-gray-50 dark:bg-[#101723] text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary pl-10 h-12 sm:text-sm placeholder:text-gray-400 dark:placeholder:text-[#586b88]" placeholder="name@example.com" required="" type="email"/>
+</div>
+</label>
+<!-- Submit Button -->
+<button class="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-white dark:focus:ring-offset-[#182334] transition-colors duration-200" type="submit">
+                        Send Reset Link
+                    </button>
+<!-- Back to Login Link -->
+<div class="text-center pt-2">
+<a class="inline-flex items-center gap-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                            Back to Login
+                        </a>
+</div>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer Links (Optional context) -->
+<div class="relative z-10 mt-8 text-center">
+<p class="text-xs text-gray-400 dark:text-gray-500">
+            © 2024 TradeHub Inc. All rights reserved.
+        </p>
+</div>
+</body></html>

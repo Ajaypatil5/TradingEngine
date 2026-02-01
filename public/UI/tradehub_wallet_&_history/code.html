@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeHub Wallet &amp; History</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0b121d",
+                        "surface-dark": "#1e293b",
+                        "card-dark": "#151e2d",
+                        "sidebar-bg": "#0b121d",
+                        "text-secondary": "#94a3b8",
+                        "nav-active": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b121d; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3c83f6; 
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="w-64 h-full flex flex-col border-r border-white/5 bg-sidebar-bg hidden md:flex shrink-0">
+<div class="flex flex-col h-full py-6 px-4">
+<div class="flex items-center gap-3 px-3 mb-10">
+<span class="material-symbols-outlined text-primary text-3xl font-bold">candlestick_chart</span>
+<h1 class="text-white text-xl font-bold tracking-tight">TradeHub</h1>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">grid_view</span>
+<span class="text-[15px] font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">newspaper</span>
+<span class="text-[15px] font-medium">News</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<span class="text-[15px] font-medium">Community</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+<span class="text-[15px] font-medium">AI Bot</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">content_copy</span>
+<span class="text-[15px] font-medium">Copy Trading</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-nav-active text-white" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="text-[15px] font-medium">Wallet</span>
+</a>
+</nav>
+<div class="flex flex-col gap-1 pt-6 border-t border-white/5">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[15px] font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">logout</span>
+<span class="text-[15px] font-medium">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 h-full overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="max-w-[1100px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">My Wallet</h1>
+<p class="text-slate-500 dark:text-text-secondary text-sm">Manage your funds, deposits, and view transaction history</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-card-dark border border-white/5 text-white text-sm font-medium hover:bg-opacity-90 transition-opacity w-fit">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Help &amp; Support</span>
+</button>
+</header>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col justify-between rounded-xl p-6 bg-card-dark shadow-lg ring-1 ring-white/5 h-full">
+<div class="flex flex-col gap-2 mb-6">
+<div class="flex items-center justify-between">
+<p class="text-text-secondary text-sm font-medium uppercase tracking-wider">Total Equity</p>
+<span class="material-symbols-outlined text-text-secondary">account_balance</span>
+</div>
+<div class="flex items-end gap-3 flex-wrap">
+<p class="text-white text-4xl font-bold tracking-tight">$12,450.00</p>
+<div class="flex items-center text-[#0bda5e] bg-[#0bda5e]/10 px-2 py-0.5 rounded text-sm font-semibold mb-1">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+<span>+2.4%</span>
+</div>
+</div>
+<p class="text-text-secondary text-sm">Real funds available for trading</p>
+</div>
+<div class="flex gap-3 pt-4 border-t border-white/10">
+<button class="flex-1 flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-primary hover:bg-blue-600 text-white text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Deposit</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_circle_right</span>
+<span>Withdraw</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col rounded-xl p-6 bg-card-dark/40 border border-dashed border-white/10 hover:bg-card-dark transition-colors">
+<div class="flex flex-col gap-2 h-full">
+<div class="flex items-center justify-between">
+<p class="text-text-secondary text-sm font-medium uppercase tracking-wider">Demo Balance</p>
+<span class="material-symbols-outlined text-text-secondary">smart_toy</span>
+</div>
+<div class="flex items-end gap-3 mt-1">
+<p class="text-white text-3xl font-bold tracking-tight">$50,000.00</p>
+</div>
+<p class="text-text-secondary text-sm mt-auto pt-4">Virtual funds for practice trading. This balance cannot be withdrawn.</p>
+<div class="mt-4">
+<button class="text-primary text-sm font-medium hover:underline flex items-center gap-1">
+                                Reset Balance <span class="material-symbols-outlined text-[16px]">refresh</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<div class="flex flex-wrap items-center justify-between gap-4 pb-2 border-b border-white/5">
+<h2 class="text-white text-xl font-bold">Transaction History</h2>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-text-secondary text-[20px]">search</span>
+<input class="bg-card-dark border-none rounded-lg py-1.5 pl-9 pr-4 text-sm text-white placeholder-text-secondary focus:ring-1 focus:ring-primary w-48 lg:w-64" placeholder="Search transactions..." type="text"/>
+</div>
+<button class="p-1.5 rounded-lg bg-card-dark border border-white/5 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-hidden rounded-xl bg-card-dark border border-white/5">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-white/5 text-text-secondary border-b border-white/5">
+<tr>
+<th class="px-6 py-4 font-semibold">Date</th>
+<th class="px-6 py-4 font-semibold">Type</th>
+<th class="px-6 py-4 font-semibold">Reference ID</th>
+<th class="px-6 py-4 font-semibold text-right">Amount</th>
+<th class="px-6 py-4 font-semibold text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[18px] block">arrow_downward</span>
+</div>
+<span class="text-white">Deposit</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary font-mono text-xs">TRX-8829103</td>
+<td class="px-6 py-4 text-right">
+<span class="text-white font-bold">+$500.00</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-500">
+<span class="size-1.5 rounded-full bg-emerald-500"></span> Completed
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Oct 22, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-orange-500/20 text-orange-400">
+<span class="material-symbols-outlined text-[18px] block">arrow_upward</span>
+</div>
+<span class="text-white">Withdrawal</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary font-mono text-xs">TRX-7739012</td>
+<td class="px-6 py-4 text-right">
+<span class="text-white font-bold">-$1,200.00</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2.5 py-1 text-xs font-semibold text-amber-500">
+<span class="size-1.5 rounded-full bg-amber-500 animate-pulse"></span> Processing
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Oct 20, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-purple-500/20 text-purple-400">
+<span class="material-symbols-outlined text-[18px] block">candlestick_chart</span>
+</div>
+<span class="text-white">Trade Profit</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary font-mono text-xs">ORD-4491022</td>
+<td class="px-6 py-4 text-right">
+<span class="text-white font-bold">+$45.20</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-500">
+<span class="size-1.5 rounded-full bg-emerald-500"></span> Completed
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Oct 18, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[18px] block">arrow_downward</span>
+</div>
+<span class="text-white">Deposit</span>
+</div>
+</td>
+<td class="px-6 py-4 text-text-secondary font-mono text-xs">TRX-3321901</td>
+<td class="px-6 py-4 text-right">
+<span class="text-white font-bold">+$2,000.00</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-500">
+<span class="size-1.5 rounded-full bg-emerald-500"></span> Completed
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-3 border-t border-white/5 bg-white/5 flex items-center justify-between">
+<span class="text-text-secondary text-xs">Showing 4 of 24 transactions</span>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-white/10 text-white disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="p-1 rounded hover:bg-white/10 text-white">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<footer class="pt-8 pb-4 text-center text-text-secondary text-xs">
+<p>© 2023 TradeHub Inc. All rights reserved.</p>
+</footer>
+</div>
+</main>
+</div>
+
+</body></html>

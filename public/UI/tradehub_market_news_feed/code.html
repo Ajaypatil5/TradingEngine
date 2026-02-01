@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeHub Market News Feed</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0b1019",
+                        "sidebar-dark": "#101723",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            .active-link .material-symbols-outlined {
+                font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased overflow-hidden">
+<div class="flex h-screen w-full flex-row overflow-hidden">
+<aside class="flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-sidebar-dark shrink-0 z-20">
+<div class="flex h-16 items-center px-6 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary !text-2xl" style="font-variation-settings: 'FILL' 1;">bar_chart_4_bars</span>
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">TradeHub</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between p-4 overflow-y-auto">
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">grid_view</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary active-link" href="#">
+<span class="material-symbols-outlined">newspaper</span>
+<span class="text-sm font-medium">News</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">groups</span>
+<span class="text-sm font-medium">Community</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">smart_toy</span>
+<span class="text-sm font-medium">AI Bot</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">layers</span>
+<span class="text-sm font-medium">Copy Trading</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">account_balance_wallet</span>
+<span class="text-sm font-medium">Wallet</span>
+</a>
+</nav>
+<nav class="flex flex-col gap-1 mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-red-400 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-red-400">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex flex-1 flex-col overflow-hidden bg-background-light dark:bg-background-dark relative">
+<header class="flex h-16 shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-sidebar-dark px-6">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">Market News</h1>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex w-80 relative">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-slate-400" style="font-size: 20px;">search</span>
+</div>
+<input class="block w-full rounded-lg border-none bg-slate-100 dark:bg-[#1e293b] py-2 pl-10 pr-3 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search news, symbols..." type="text"/>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<button class="relative rounded-full p-1.5 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">notifications</span>
+<span class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-[#101723]"></span>
+</button>
+<button class="flex items-center gap-2 rounded-full pl-1 pr-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<div class="h-8 w-8 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700" data-alt="User avatar placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuoTEIARVKkeEmsb-qKf0AL5lMWk9IpAaLg0wNBZQIWOMSt82YHzlX6ZVjZNnX3KNhY4IJK125aGoAb7fdDyRfHPHZPXqy1I7Iyx-z-JGNoGMLysX8TSOHp5s2qxWtUSiryr4yK4LTK93-gMTYBCrVaFVmefImpn4s4O7AhZscH0fs21eIpID-bRq6ZsXgEnb5QsynNDGEcR8zsd46vQ0o0wtqVW_m4zKD67ucEBbiajwoJzD88nbmZUygkdzaljwe88PJLGpSyTRO'); background-size: cover;"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200 hidden sm:block">Alex T.</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
+<div class="mx-auto max-w-5xl flex flex-col gap-6">
+<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Top Stories</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Real-time updates from global financial markets.</p>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 bg-white dark:bg-[#1e293b] px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px;">schedule</span>
+<span>Oct 24, 2023 • 14:32 GMT</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2 pb-2">
+<button class="flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-600 transition-colors">
+                        All News
+                    </button>
+<button class="flex h-9 items-center justify-center rounded-lg bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Forex
+                    </button>
+<button class="flex h-9 items-center justify-center rounded-lg bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Crypto
+                    </button>
+<button class="flex h-9 items-center justify-center rounded-lg bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Stocks
+                    </button>
+<button class="flex h-9 items-center justify-center rounded-lg bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Metals
+                    </button>
+<button class="flex h-9 items-center justify-center rounded-lg bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Energy
+                    </button>
+</div>
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-[#1e293b] shadow-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex flex-col md:flex-row h-full">
+<div class="flex flex-1 flex-col justify-between p-6 order-2 md:order-1">
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center rounded-full bg-orange-100 dark:bg-orange-500/10 px-2.5 py-0.5 text-xs font-medium text-orange-700 dark:text-orange-400">
+                                        Crypto
+                                    </span>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Bloomberg • 15m ago</span>
+</div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">
+                                    Bitcoin surges past $45k as institutional demand spikes ahead of ETF approval
+                                </h3>
+<p class="text-slate-600 dark:text-slate-400 line-clamp-3">
+                                    Leading cryptocurrency sees renewed interest from major ETFs and institutional investors looking for inflation hedges. Analysts predict a strong bullish trend continuing into the next quarter as regulatory clarity improves in key markets.
+                                </p>
+</div>
+<div class="mt-6 flex items-center gap-4">
+<button class="flex items-center gap-1 text-sm font-semibold text-primary hover:text-blue-400">
+                                    Read Analysis <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<div class="flex items-center gap-1 text-green-500 dark:text-green-400 text-sm font-medium bg-green-50 dark:bg-green-500/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm">trending_up</span> Bullish
+                                </div>
+</div>
+</div>
+<div class="w-full md:w-2/5 h-48 md:h-auto bg-cover bg-center order-1 md:order-2" data-alt="Abstract visualization of digital currency charts glowing orange and blue" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvj03toc_FUhGqn9PMBOgN_FFeeP0zr1v5wt9t5AiBnYNMIrfJPjpSjsNIbptgut2cMWSuEry-yvSTFmeTDhWSZ5h0CSNTz9EA_HMFLFfBNjmbLlkT6gYPDgPMUaFSHqfMlkb3TT-3oLjEm4QvbUSFKWF3JwOUkbKR6GtvoTtwq0pfPiblh_dhbiOfRy85Bs1NW0b90wIjusnwb-IGDC1R8J4ogP4vaivQGas8UjffQAjODbfye9LkArygEHvI1iLTtkNNUYQM_y_I');">
+<div class="h-full w-full bg-gradient-to-t from-black/60 to-transparent md:bg-gradient-to-l md:from-transparent md:to-[#1e293b]/10 dark:md:to-[#1e293b]"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col rounded-xl bg-white dark:bg-[#1e293b] p-5 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-500/10 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-400">
+                                    Stocks
+                                </span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Reuters • 1h ago</span>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-xl">bookmark</span></button>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                            Tesla misses Q3 earnings expectations, stock dips 4% in pre-market
+                        </h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+                            EV maker cites supply chain constraints and margin compression due to recent price cuts across all models.
+                        </p>
+<div class="mt-auto flex items-center justify-between border-t border-slate-100 dark:border-slate-700 pt-4">
+<div class="flex items-center gap-1 text-red-500 dark:text-red-400 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">trending_down</span> Bearish
+                            </div>
+<span class="text-xs text-slate-400">TSLA -4.12%</span>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-white dark:bg-[#1e293b] p-5 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center rounded-full bg-purple-100 dark:bg-purple-500/10 px-2.5 py-0.5 text-xs font-medium text-purple-700 dark:text-purple-400">
+                                    Forex
+                                </span>
+<span class="text-xs text-slate-500 dark:text-slate-400">FXStreet • 2h ago</span>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-xl">bookmark</span></button>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                            USD/JPY holds above 150.00 amid intervention fears
+                        </h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+                            Bank of Japan officials remain tight-lipped, but market volatility suggests traders are wary of sudden moves.
+                        </p>
+<div class="mt-auto flex items-center justify-between border-t border-slate-100 dark:border-slate-700 pt-4">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">remove</span> Neutral
+                            </div>
+<span class="text-xs text-slate-400">USD/JPY +0.05%</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white">Earlier Today</h3>
+<div class="flex flex-col sm:flex-row gap-4 p-4 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-[#253041] transition-colors cursor-pointer group">
+<div class="h-24 w-full sm:w-32 shrink-0 rounded-lg bg-cover bg-center" data-alt="Gold bars stacked with chart overlay" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBIhtGG5PDeHGYpoTJxhms2nDiUR1lo37SAqQTnNnBv8xrvCx7UNlXa-Qcnps_RXwJ3LcamBYBIVKZzQaAPnUKvRHN_Ba9eXF0dceOMbrrWOxBcC_1yUT7ceZCF2N2gse_glcpAX5swj7udPRDN1BRjHbsarmzClb9M0FWz0aLyawLZLN4CyHLZa49fsYectlhPtgzbCIzHhf7x5X8EWnosqwR8_f2-WaxBpnm2o3ZprCpFUQoWnZUMks4rke_Fui8M9nEzqaaxNbHG');"></div>
+<div class="flex flex-1 flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-bold text-yellow-600 dark:text-yellow-500">Metals</span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">CNBC • 3h ago</span>
+</div>
+<h5 class="text-base font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Gold prices stabilize near $1,980 as treasury yields cool off</h5>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-1">
+                                Safe-haven demand remains robust amidst geopolitical tensions in the Middle East.
+                            </p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 p-4 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-[#253041] transition-colors cursor-pointer group">
+<div class="h-24 w-full sm:w-32 shrink-0 rounded-lg bg-cover bg-center" data-alt="Oil rigs in ocean at sunset" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBMEfl8zNASNtWuf0kkURG6jlBWjdvLhrbtTjRQ1OGuA5WJKSsfKKG7iesVC18HdkYd1m4MZABW9--EywwwdD-Kb8HE2U2QHQj585aNsv1L4nN6Erd8OW6y-jo-X7g20MKRZrOWtC-LOoIVSDm3nLsSaBb6Wgq_dC6uiUaLSTC09jA03ANHRfXVIreUpqIc79qpds1DcNjXOa9lvPFngOV1xOimq6GrckolBSANsHuShq_1JURIsHJHiDwES7rc632W0jxDjV8vdly1');"></div>
+<div class="flex flex-1 flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-bold text-teal-600 dark:text-teal-500">Energy</span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">OilPrice.com • 4h ago</span>
+</div>
+<h5 class="text-base font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Crude oil inventories show surprise build, WTI drops below $85</h5>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-1">
+                                EIA report indicates lower domestic demand for gasoline, putting downward pressure on prices.
+                            </p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 p-4 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-[#253041] transition-colors cursor-pointer group">
+<div class="flex flex-1 flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-bold text-blue-600 dark:text-blue-500">Tech Stocks</span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">The Verge • 5h ago</span>
+</div>
+<h5 class="text-base font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Apple announces new 'Scary Fast' event for Oct 30</h5>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-1">
+                                Expected to unveil new M3 chips and refreshed iMac lineup ahead of holiday season.
+                            </p>
+</div>
+<div class="flex items-center justify-start sm:justify-end gap-3 sm:w-auto">
+<div class="flex items-center gap-1 text-green-500 dark:text-green-400 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span> AAPL +1.2%
+                            </div>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-4 pb-8">
+<button class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-1">
+                        Load More Stories <span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

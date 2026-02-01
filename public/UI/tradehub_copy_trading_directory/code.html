@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeHub - Copy Trading</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0a101d",
+                        "surface-dark": "#101723",
+                        "surface-dark-highlight": "#182334",
+                        "text-secondary": "#94a3b8",
+                        "success": "#10b981",
+                        "danger": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a101d; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #182334; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #3c83f6; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="flex w-64 flex-col bg-[#0a101d] border-r border-white/5 flex-shrink-0 z-20">
+<div class="flex flex-col h-full py-6">
+<div class="flex items-center gap-3 px-6 mb-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[28px] fill-current">candlestick_chart</span>
+<h1 class="text-white text-xl font-bold tracking-tight">TradeHub</h1>
+</div>
+</div>
+<nav class="flex flex-col gap-1 px-3 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">grid_view</span>
+<span class="text-[14px] font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">newspaper</span>
+<span class="text-[14px] font-medium">News</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="text-[14px] font-medium">Community</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+<span class="text-[14px] font-medium">AI Bot</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">content_copy</span>
+<span class="text-[14px] font-semibold">Copy Trading</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="text-[14px] font-medium">Wallet</span>
+</a>
+</nav>
+<div class="px-3 pt-4 border-t border-white/5 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[14px] font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-white hover:bg-surface-dark-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">logout</span>
+<span class="text-[14px] font-medium">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="max-w-[1400px] mx-auto w-full p-6 md:p-8 flex flex-col gap-8">
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-surface-dark-highlight/50">
+<div class="flex flex-col gap-2">
+<h2 class="text-white text-3xl md:text-4xl font-black tracking-tight">Top Traders</h2>
+<p class="text-text-secondary text-base max-w-2xl">Discover and copy elite strategies from the world's most successful traders.</p>
+</div>
+<button class="flex shrink-0 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-surface-dark-highlight hover:bg-surface-dark-highlight/80 border border-white/5 text-white text-sm font-bold transition-colors">
+<span class="material-symbols-outlined mr-2 text-[20px]">verified</span>
+                        Become a Trader
+                    </button>
+</header>
+<div class="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center bg-surface-dark p-4 rounded-xl border border-surface-dark-highlight">
+<div class="w-full lg:w-96 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">search</span>
+</div>
+<input class="w-full bg-surface-dark-highlight/50 text-white placeholder-text-secondary rounded-lg pl-10 pr-4 py-2.5 border-none focus:ring-2 focus:ring-primary focus:bg-surface-dark-highlight transition-all text-sm" placeholder="Search by trader name or strategy..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-text-secondary text-sm font-medium mr-2 hidden xl:block">Filter by:</span>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-dark-highlight hover:bg-surface-dark-highlight/80 text-white text-sm font-medium transition-colors border border-transparent hover:border-white/10">
+<span>Risk: Low</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-dark-highlight hover:bg-surface-dark-highlight/80 text-white text-sm font-medium transition-colors border border-transparent hover:border-white/10">
+<span>30 Days</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/20 text-primary border border-primary/30 text-sm font-medium">
+<span>Win Rate &gt; 60%</span>
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-dark-highlight hover:bg-surface-dark-highlight/80 text-white text-sm font-medium transition-colors border border-transparent hover:border-white/10">
+<span>Asset: Crypto</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<article class="group bg-surface-dark rounded-xl p-5 border border-surface-dark-highlight hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col gap-5">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="relative">
+<div class="size-12 rounded-full bg-cover bg-center ring-2 ring-surface-dark" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCm4yCRsDAKx0BxXaaIujbcxXedvy1xNegbfJJ_ON2VCGBxrRPMAwRPWOqB4NjrVkHusXPScUhdz2JUQ9N58rsrMhrekI5PUcADqHxaYsfRvcdUiX-vQAvaPZD3DlpdF3GJn8VCJICevm170e8Kq9P2CFREaWBhmB5IcYkD4EnFq30CYpO2vCje07PdS6fZ0FQREddALLqpGby46pPpc4KBUYNBOQwKOCYNC-chBzzCTjG3IFbK8aXbi8u8d_KHwDgp1GPYLcOg6hm8");'></div>
+<div class="absolute -bottom-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-surface-dark flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px] fill-current">star</span>
+                                        Elite
+                                    </div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">CryptoKing99</h3>
+<p class="text-text-secondary text-xs">Bitcoin &amp; Altcoin Focus</p>
+</div>
+</div>
+<button class="text-text-secondary hover:text-white p-1 rounded-md hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+</div>
+<div class="h-16 w-full rounded-lg bg-gradient-to-r from-transparent via-green-500/5 to-green-500/20 relative overflow-hidden flex items-end">
+<svg class="w-full h-full absolute bottom-0 left-0" preserveAspectRatio="none" viewBox="0 0 100 40">
+<path d="M0 35 Q 10 32, 20 25 T 40 20 T 60 15 T 80 5 T 100 2" fill="none" stroke="#10b981" stroke-width="2"></path>
+<path d="M0 35 Q 10 32, 20 25 T 40 20 T 60 15 T 80 5 T 100 2 V 40 H 0 Z" fill="url(#gradientGreen)" opacity="0.2"></path>
+<defs>
+<linearGradient id="gradientGreen" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#10b981;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#10b981;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+</svg>
+</div>
+<div class="grid grid-cols-3 gap-2 divide-x divide-surface-dark-highlight/50">
+<div class="flex flex-col px-2 first:pl-0">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Win Rate</span>
+<span class="text-success text-lg font-bold">88.5%</span>
+</div>
+<div class="flex flex-col px-4">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Risk</span>
+<div class="flex items-center gap-1">
+<span class="text-white text-lg font-bold">3</span>
+<span class="text-text-secondary text-xs">/10</span>
+</div>
+</div>
+<div class="flex flex-col px-2">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Followers</span>
+<span class="text-white text-lg font-bold">12.4k</span>
+</div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2">
+<span>Copy Trader</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</article>
+<article class="group bg-surface-dark rounded-xl p-5 border border-surface-dark-highlight hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col gap-5">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="relative">
+<div class="size-12 rounded-full bg-cover bg-center ring-2 ring-surface-dark" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqaVyCVwc5HBZGZ6Rfkq9pKpoEYDK5Pdda0EU5nEt4-aIRbNLHoAXWB3uir94ny2pJe6HB_R5zKfW1MCDaVsf0X4vW8KCaONK1FSpM5IGeJ84hs3lN-a7iKVxSqjqEkXtCbgjdSredGy_Rb9Q-nNHMrnLlm4FfaHDSLjfHdJusWllKk-UP4KKy65adfRhtuxcdvCXXfcIg-bIJDjxmvgvz8xfC3rT2mHsP4jDP5z442ccSUojtRDrrEvi9R6_dCctZkUK-dvNTkZK2");'></div>
+<div class="absolute -bottom-1 -right-1 bg-gray-400 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-surface-dark flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px] fill-current">verified</span>
+                                        Pro
+                                    </div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">SarahTrades</h3>
+<p class="text-text-secondary text-xs">Forex &amp; Commodities</p>
+</div>
+</div>
+<button class="text-text-secondary hover:text-white p-1 rounded-md hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+</div>
+<div class="h-16 w-full rounded-lg bg-gradient-to-r from-transparent via-green-500/5 to-green-500/20 relative overflow-hidden flex items-end">
+<svg class="w-full h-full absolute bottom-0 left-0" preserveAspectRatio="none" viewBox="0 0 100 40">
+<path d="M0 30 Q 20 35, 30 25 T 50 20 T 70 18 T 90 10 T 100 5" fill="none" stroke="#10b981" stroke-width="2"></path>
+</svg>
+</div>
+<div class="grid grid-cols-3 gap-2 divide-x divide-surface-dark-highlight/50">
+<div class="flex flex-col px-2 first:pl-0">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Win Rate</span>
+<span class="text-success text-lg font-bold">76.2%</span>
+</div>
+<div class="flex flex-col px-4">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Risk</span>
+<div class="flex items-center gap-1">
+<span class="text-white text-lg font-bold">5</span>
+<span class="text-text-secondary text-xs">/10</span>
+</div>
+</div>
+<div class="flex flex-col px-2">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Followers</span>
+<span class="text-white text-lg font-bold">8.1k</span>
+</div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-surface-dark-highlight hover:bg-surface-dark-highlight/80 text-white font-bold text-sm transition-colors border border-white/5 flex items-center justify-center gap-2">
+<span>Copy Trader</span>
+</button>
+</article>
+<article class="group bg-surface-dark rounded-xl p-5 border border-surface-dark-highlight hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col gap-5">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="relative">
+<div class="size-12 rounded-full bg-cover bg-center ring-2 ring-surface-dark" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJhHckK5bBOklE975vaLTQ_wCPk7HYJasUtq149xP0EPQHfiVgIoTZqUJOz5lrJlM6V2sgLu2jLoXIqIVWvT5GNuRvzyArBi0ZoUAdRafke5UC7defRbrlFNOuAr7bsrUBB1FQ-NbMGSZdDLQrlUq7u1zBy0gOVAUrnpzwY1NROf9EECdjFG93kcPaz8IRYcf2UPnzycvlea9UYv-m6-LhnkPBITB2dAUaMaa24yYkNUPjLBm5CWJOV1WDZWGHXZ285E3_Gy4Fd86t");'></div>
+<div class="absolute -bottom-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-surface-dark flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px] fill-current">star</span>
+                                        Elite
+                                    </div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">MacroMike</h3>
+<p class="text-text-secondary text-xs">Global Macro &amp; Indices</p>
+</div>
+</div>
+<button class="text-text-secondary hover:text-white p-1 rounded-md hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+</div>
+<div class="h-16 w-full rounded-lg bg-gradient-to-r from-transparent via-green-500/5 to-green-500/20 relative overflow-hidden flex items-end">
+<svg class="w-full h-full absolute bottom-0 left-0" preserveAspectRatio="none" viewBox="0 0 100 40">
+<path d="M0 25 Q 15 28, 25 20 T 45 15 T 65 22 T 85 8 T 100 2" fill="none" stroke="#10b981" stroke-width="2"></path>
+</svg>
+</div>
+<div class="grid grid-cols-3 gap-2 divide-x divide-surface-dark-highlight/50">
+<div class="flex flex-col px-2 first:pl-0">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Win Rate</span>
+<span class="text-success text-lg font-bold">92.1%</span>
+</div>
+<div class="flex flex-col px-4">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Risk</span>
+<div class="flex items-center gap-1">
+<span class="text-white text-lg font-bold">2</span>
+<span class="text-text-secondary text-xs">/10</span>
+</div>
+</div>
+<div class="flex flex-col px-2">
+<span class="text-text-secondary text-[11px] uppercase tracking-wider font-semibold">Followers</span>
+<span class="text-white text-lg font-bold">45.2k</span>
+</div>
+</div>
+<button class="mt-auto w-full py-2.5 rounded-lg bg-surface-dark-highlight hover:bg-surface-dark-highlight/80 text-white font-bold text-sm transition-colors border border-white/5 flex items-center justify-center gap-2">
+<span>Copy Trader</span>
+</button>
+</article>
+</div>
+<div class="flex justify-center mt-4 mb-8">
+<button class="flex items-center gap-2 text-text-secondary hover:text-white text-sm font-medium transition-colors px-4 py-2 hover:bg-surface-dark rounded-lg">
+<span class="material-symbols-outlined">refresh</span>
+                        Load More Traders
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
